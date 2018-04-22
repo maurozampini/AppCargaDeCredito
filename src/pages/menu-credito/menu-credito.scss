@@ -68,7 +68,7 @@ page-menu-credito {
     //   }
       
       button {
-        padding: 19px 39px 18px 39px;
+      
         color: #FFF;
         background-color: #4bc970;
         font-size: 18px;
@@ -144,4 +144,18 @@ page-menu-credito {
 }
 .botonF6:active{
   transform:scale(1.1);  
+}
+
+.ToastWarning{
+  > div{
+    background-color:#FF0015!important;
+    text-align: center;
+}
+}
+
+.ToastSuccess{
+  > div{
+    background-color:#00BD39!important;
+    text-align: center;
+}
 }

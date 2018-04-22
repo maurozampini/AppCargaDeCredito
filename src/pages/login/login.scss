@@ -9,8 +9,7 @@ page-login {
     body {
       font-family: 'Nunito', sans-serif;
       color: #0F2E49;
-        background: url("/assets/img/QRCode.jpg") no-repeat; 
-    
+        background: url("../assets/imgs/fondo1.jpg") no-repeat; 
     }
     
 
@@ -72,7 +71,7 @@ page-login {
     .boton2 {
       padding: 15px 30px 15px 30px;
       color: #FFF;
-      background-color: #85003E;
+      background-color: #535353;
       font-size: 18px;
       text-align: center;
       font-style: normal;
@@ -84,14 +83,10 @@ page-login {
       margin-bottom: 10px;
     }
 
-
-    
     fieldset {
       margin-bottom: 30px;
       border: none;
     }
-    
-
     
     label {
       display: block;

@@ -1,18 +1,18 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,AlertController } from 'ionic-angular';
-import { Platform } from 'ionic-angular';
-import { BarcodeScanner ,BarcodeScannerOptions } from '@ionic-native/barcode-scanner';
-import {AngularFireDatabase, FirebaseListObservable} from 'angularfire2/database';
+import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database-deprecated';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { LoginPage } from '../../pages/login/login';
+import { ToastController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
   selector: 'page-menu-credito',
   templateUrl: 'menu-credito.html',
 })
-export class MenuCreditoPage {
-
+export class MenuCreditoPage
+{
   scanData : {};
   options :BarcodeScannerOptions;
   list: FirebaseListObservable<any>;
@@ -33,7 +33,8 @@ export class MenuCreditoPage {
                db:AngularFireDatabase,
                public alertCtrl: AlertController,
               private barcodeScanner: BarcodeScanner,
-              private authAf: AngularFireAuth) 
+              private authAf: AngularFireAuth,
+              private toastCtrl: ToastController) 
   {
 
     this.ExiteUsuario = false;
@@ -67,12 +68,12 @@ export class MenuCreditoPage {
           this.credito100 = "";
         }
         this.GetCredito();
-        this.getCreditoACargar();
+        //this.getCreditoACargar();
         
     })
   } 
 
-  confirmarCerrarSesion() {
+confirmarCerrarSesion() {
     let alert = this.alertCtrl.create({
       title: 'Cerrar sesión',
       message: '¿Desea cerrar la sesión?',
@@ -107,12 +108,13 @@ export class MenuCreditoPage {
         console.log(barcodeData);
         this.scanData = barcodeData;
         this.codigo = barcodeData.text;
-        this.getCreditoACargar();
+        //this.getCreditoACargar();
+        this.Cargar();
     }, (err) => {
         console.log("Error occured : " + err);
     });  
     
-    this.getCreditoACargar();
+    //this.getCreditoACargar();
   }
   
   Cargar()
@@ -129,24 +131,32 @@ export class MenuCreditoPage {
 
             this.credito10 = "8c95def646b6127282ed50454b73240300dccabc";
 
-            let alert = this.alertCtrl.create({
-              title: "Mensaje:",
-              subTitle: "Se cargo 10 credito.",
-              buttons: ['OK']
+             let toast = this.toastCtrl.create({
+              message: 'Se cargo 10 credito',
+              duration: 2000,
+              position: 'top',
+              cssClass: "ToastSuccess",
+              showCloseButton: true,
+              closeButtonText: "Cerrar",
+              dismissOnPageChange: true
             });
-             alert.present();
+            toast.present();
 
              this.CreditoACargar="Credito a cargar 0";
              this.codigo="";
           }
           else
           {
-            let alert = this.alertCtrl.create({
-              title: "Mensaje:",
-              subTitle: "Ya se uso el codigo.",
-              buttons: ['OK']
+             let toast = this.toastCtrl.create({
+              message: 'Ya se uso el codigo',
+              duration: 2000,
+              position: 'bottom',
+              cssClass: "ToastWarning",
+              showCloseButton: true,
+              closeButtonText: "Cerrar",
+              dismissOnPageChange: true
             });
-             alert.present();
+            toast.present();
           }
 
 
@@ -162,23 +172,31 @@ export class MenuCreditoPage {
 
           this.credito50 = "ae338e4e0cbb4e4bcffaf9ce5b409feb8edd5172 ";
 
-          let alert = this.alertCtrl.create({
-            title: "Mensaje:",
-            subTitle: "Se cargo 50 credito.",
-            buttons: ['OK']
+          let toast = this.toastCtrl.create({
+            message: 'Se cargo 50 credito',
+            duration: 2000,
+            position: 'top',
+            cssClass: "ToastSuccess",
+            showCloseButton: true,
+            closeButtonText: "Cerrar",
+            dismissOnPageChange: true
           });
-           alert.present();
+          toast.present();
            this.CreditoACargar="Credito a cargar 0";
            this.codigo="";
         }
         else
         {
-          let alert = this.alertCtrl.create({
-            title: "Mensaje:",
-            subTitle: "Ya se uso el codigo.",
-            buttons: ['OK']
+          let toast = this.toastCtrl.create({
+            message: 'Ya se uso el codigo',
+            duration: 2000,
+            position: 'bottom',
+            cssClass: "ToastWarning",
+            showCloseButton: true,
+            closeButtonText: "Cerrar",
+            dismissOnPageChange: true
           });
-           alert.present();
+          toast.present();
         }
 
         
@@ -194,33 +212,46 @@ export class MenuCreditoPage {
 
           this.credito100 = "2786f4877b9091dcad7f35751bfcf5d5ea712b2f";
 
-          let alert = this.alertCtrl.create({
-            title: "Mensaje:",
-            subTitle: "Se cargo 100 credito.",
-            buttons: ['OK']
+          let toast = this.toastCtrl.create({
+            message: 'Se cargo 100 credito',
+            duration: 2000,
+            position: 'top',
+            cssClass: "ToastSuccess",
+            showCloseButton: true,
+            closeButtonText: "Cerrar",
+            dismissOnPageChange: true
           });
-           alert.present();
+          toast.present();
+
            this.CreditoACargar="Credito a cargar 0";
            this.codigo="";
         }
         else
         {
-          let alert = this.alertCtrl.create({
-            title: "Mensaje:",
-            subTitle: "Ya se uso el codigo.",
-            buttons: ['OK']
+          let toast = this.toastCtrl.create({
+            message: 'Ya se uso el codigo',
+            duration: 2000,
+            position: 'bottom',
+            cssClass: "ToastWarning",
+            showCloseButton: true,
+            closeButtonText: "Cerrar",
+            dismissOnPageChange: true
           });
-           alert.present();
+          toast.present();
         }
 
       }
       else{
-        let alert = this.alertCtrl.create({
-          title: "Mensaje:",
-          subTitle: "El codigo no es valido.",
-          buttons: ['OK']
+        let toast = this.toastCtrl.create({
+          message: 'El código no es válido',
+          duration: 2000,
+          position: 'middle',
+          cssClass: "ToastWarning",
+          showCloseButton: true,
+          closeButtonText: "Cerrar",
+          dismissOnPageChange: true
         });
-         alert.present();
+        toast.present();
       }
   }
 
@@ -249,26 +280,37 @@ export class MenuCreditoPage {
 
   getCreditoACargar()
   {
+    if ("8c95def646b6127282ed50454b73240300dccabc" == this.codigo)
+    {
+      this.CreditoACargar="Credito a cargar 10";
+    }
 
-    if ("8c95def646b6127282ed50454b73240300dccabc" == this.codigo) {
-      
-        this.CreditoACargar="Credito a cargar 10";
-      
-           } else if ("ae338e4e0cbb4e4bcffaf9ce5b409feb8edd5172 " == this.codigo) {
-     
-            this.CreditoACargar="Credito a cargar 50";
-           } else if("2786f4877b9091dcad7f35751bfcf5d5ea712b2f" == this.codigo){
-            this.CreditoACargar="Credito a cargar 100";
-           }
-           else{
-            this.CreditoACargar="Credito a cargar 0";
-           }
+    else if ("ae338e4e0cbb4e4bcffaf9ce5b409feb8edd5172 " == this.codigo)
+    {
+      this.CreditoACargar="Credito a cargar 50";
+    }
+
+    else if("2786f4877b9091dcad7f35751bfcf5d5ea712b2f" == this.codigo)
+    {
+      this.CreditoACargar="Credito a cargar 100";
+    }
+
+    else
+    {
+      let toast = this.toastCtrl.create({
+        message: 'Código inválido',
+        duration: 2000,
+        position: 'middle',
+        cssClass: "ToastWarning",
+        showCloseButton: true,
+        closeButtonText: "Cerrar",
+        dismissOnPageChange: true
+      });
+      toast.present();
+    }
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad MenuCreditoPage');
   }
-
-
-
 }

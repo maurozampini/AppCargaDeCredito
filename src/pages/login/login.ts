@@ -2,11 +2,10 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AngularFireModule} from 'angularfire2';
 import { AngularFireAuthModule,AngularFireAuth, } from 'angularfire2/auth';
-import {AngularFireDatabase, FirebaseListObservable} from 'angularfire2/database';
+import {AngularFireDatabase, FirebaseListObservable} from 'angularfire2/database-deprecated';
 import {firebase}  from 'firebase/database';
-import { TabsPage } from '../tabs/tabs';
 import { RegisterPage } from '../register/register';
-import { AlertController ,LoadingController, Loading} from 'ionic-angular';
+import { AlertController, LoadingController, Loading, ToastController } from 'ionic-angular';
 import { MenuCreditoPage } from '../menu-credito/menu-credito';
 
 
@@ -23,7 +22,8 @@ tipoUser:string;
               public navCtrl: NavController,
               public navParams: NavParams,
               private _auth:AngularFireAuth,
-              public alertCtrl: AlertController) {
+              public alertCtrl: AlertController,
+              private toastCtrl: ToastController) {
   }
   async login()
   {
@@ -39,10 +39,6 @@ tipoUser:string;
                                           this.navCtrl.push(MenuCreditoPage,{usuario:this.username})})
                         .catch(error =>{ espera.dismiss();
                                         this.showAlert(error.message,"Error al ingresar!")})
-
-                        
-
-                      
                     }
   }
   UserValido()
@@ -73,50 +69,53 @@ tipoUser:string;
   
   }  
 
-  showAlert(mensaje:string,titulo:string) {
-    
+  showAlert(mensaje: string, titulo: string)
+  {
     switch(mensaje)
     {
-      
       case "The email address is badly formatted.":
       {
-
-        mensaje="El email no contiene un formato correcto";
+        mensaje = "El email no contiene un formato correcto";
         break;
       }
       case "The password is invalid or the user does not have a password.":
       {
-        mensaje="La clave es incorrecta, intente nuevamente";
+        mensaje = "La clave es incorrecta, intente nuevamente";
       }
-
     }
-    let alert = this.alertCtrl.create({
-      title: titulo,
-      subTitle: mensaje,
-      buttons: ['OK']
+    let toast = this.toastCtrl.create(
+    {
+      message: mensaje,
+      duration: 2000,
+      position: 'middle',
+      cssClass: "ToastWarning",
+      showCloseButton: true,
+      closeButtonText: "Cerrar",
+      dismissOnPageChange: true
     });
-    alert.present();
+    toast.present();
   }  
 
-Registrarse(){
+Registrarse()
+{
   this.navCtrl.push(RegisterPage);
-
 }
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
-  }
 
-  MiSpiner():Loading
+ionViewDidLoad()
+{
+  console.log('ionViewDidLoad LoginPage');
+}
+
+MiSpiner():Loading
+{
+  let loader = this.spiner.create(
   {
-    let loader = this.spiner.create({
-      content:"Espere..",
-      duration: 25000
-      
+    content:"Espere..",
+    duration: 25000
     });
    // loader.present();
     return loader;
   }
-
 }
 
 
