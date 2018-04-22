@@ -275,7 +275,7 @@ confirmarCerrarSesion() {
       {
         this.Micredito += 100;
       }
-      this.CreditoMensaje = "Tu credito es : "+this.Micredito;
+      this.CreditoMensaje = "Tu credito es: " + this.Micredito;
   }
 
   getCreditoACargar()

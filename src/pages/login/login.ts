@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { AngularFireModule} from 'angularfire2';
-import { AngularFireAuthModule,AngularFireAuth, } from 'angularfire2/auth';
-import {AngularFireDatabase, FirebaseListObservable} from 'angularfire2/database-deprecated';
-import {firebase}  from 'firebase/database';
+import { AngularFireAuth } from 'angularfire2/auth';
 import { RegisterPage } from '../register/register';
 import { AlertController, LoadingController, Loading, ToastController } from 'ionic-angular';
 import { MenuCreditoPage } from '../menu-credito/menu-credito';
@@ -14,59 +11,74 @@ import { MenuCreditoPage } from '../menu-credito/menu-credito';
   selector: 'page-login',
   templateUrl: 'login.html',
 })
-export class LoginPage {
-username:string;
-password:string;
-tipoUser:string;
-  constructor(public spiner:LoadingController,
+export class LoginPage
+{
+  username: string;
+  password: string;
+  tipoUser: string;
+  
+  constructor(public spiner: LoadingController,
               public navCtrl: NavController,
               public navParams: NavParams,
-              private _auth:AngularFireAuth,
+              private afAuth: AngularFireAuth,
               public alertCtrl: AlertController,
-              private toastCtrl: ToastController) {
-  }
+              private toastCtrl: ToastController)
+              {
+
+              }
+
   async login()
   {
-    if(this.username==null||this.password==null||this.password==''||this.username=='')
+    if(this.username == null || this.password == null || this.password == '' || this.username == '')
       {
-        this.showAlert("Debe completar el Email y su Clave para ingresar","Campo vacio!");
+        this.showAlert("Debe completar el Email y su Clave para ingresar", "Campo vacio!");
       }
-      else{
+
+      else
+      {
         let espera = this.MiSpiner();
-        espera.present();       
-        await this._auth.auth.signInWithEmailAndPassword(this.username,this.password)
-                        .then(result => { espera.dismiss();
-                                          this.navCtrl.push(MenuCreditoPage,{usuario:this.username})})
-                        .catch(error =>{ espera.dismiss();
-                                        this.showAlert(error.message,"Error al ingresar!")})
-                    }
+        espera.present();    
+        await this.afAuth.auth.signInWithEmailAndPassword(this.username,this.password)
+              .then(result => 
+                {
+                  espera.dismiss();
+                  this.navCtrl.push(MenuCreditoPage, { usuario: this.username })
+                })
+              .catch(error =>
+                {
+                  espera.dismiss();
+                  setTimeout(() => {
+                    this.showAlert(error.message, "Error al ingresar!");
+                   }, 500);
+                })
+      }
   }
+
   UserValido()
   {
-    switch(this.tipoUser){
-      case "admin":{
-        this.username="admin@admin.com";
-        this.password="111111";
-        break;}
-      case "usuario":{
+    switch(this.tipoUser)
+    {
+      case "admin":
+        this.username = "admin@admin.com";
+        this.password = "111111";
+        break;
+      case "usuario":
         this.username="usuario@usuario.com";
         this.password="333333";
-        break;}
-      case "invitado":{
+        break;
+      case "invitado":
         this.username="invitado@invitado.com";
         this.password="222222";
-        break;}                
-      case "jugador1":{
+        break;              
+      case "jugador1":
         this.username="j1@jugador.com";
         this.password="444444";
-        break;}
-      case "jugador2":{
+        break;
+      case "jugador2":
         this.username="j2@jugador.com";
         this.password="555555";
-        break;}        
+        break;     
     }
-
-  
   }  
 
   showAlert(mensaje: string, titulo: string)
@@ -83,6 +95,7 @@ tipoUser:string;
         mensaje = "La clave es incorrecta, intente nuevamente";
       }
     }
+    
     let toast = this.toastCtrl.create(
     {
       message: mensaje,
@@ -106,12 +119,12 @@ ionViewDidLoad()
   console.log('ionViewDidLoad LoginPage');
 }
 
-MiSpiner():Loading
+MiSpiner(): Loading
 {
   let loader = this.spiner.create(
   {
-    content:"Espere..",
-    duration: 25000
+    content: "Espere...",
+    duration: 2500
     });
    // loader.present();
     return loader;

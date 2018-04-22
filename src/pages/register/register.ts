@@ -35,20 +35,26 @@ export class RegisterPage {
     if(this.password.length > 5)
     {
       if(this.password == this.passwordconfirm)
-        try
-        {
-          this.MiSpiner();
-          await this._auth.auth.createUserWithEmailAndPassword(this.username, this.password);
-          this.Mensaje=this.username + "¡Fue ingresado exitosamente!"
-          alert(this.Mensaje);
-          this.navCtrl.pop();
-        }
-
-        catch(e)
-        {
-          console.log(e);
-          this.showAlert(e.message, "Error al registrarse");
-        }
+      {  
+          let espera = this.MiSpiner();
+          espera.present();    
+          await this._auth.auth.createUserWithEmailAndPassword(this.username, this.password)
+          .then(result => 
+            {
+              espera.dismiss();
+              this.Mensaje = this.username + "¡Fue registrado exitosamente!";
+              alert(this.Mensaje);
+              this.navCtrl.pop();
+            })
+          .catch(error =>
+             {
+               espera.dismiss();
+               console.log(error);
+               setTimeout(() => {
+               this.showAlert(error.message, "Error al registrarse");
+               }, 500);
+             })
+      }
 
       else
       {
@@ -71,7 +77,6 @@ export class RegisterPage {
         mensaje = "El email no contiene un formato correcto";
         break;
       }
-
     }
     let alert = this.alertCtrl.create(
     {
@@ -87,10 +92,10 @@ export class RegisterPage {
   {
     let loader = this.spiner.create(
       {
-        content:"Espere...",
+        content: "Espere...",
         duration: 2500
       });
-    loader.present();
+      return loader;
   }
 
   async Cancelar()
