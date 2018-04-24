@@ -1,4 +1,8 @@
 page-login {
+
+  ion-item{
+    border-radius: 20px;
+  }
   /*
  .acomodar {
   display:  flex;
@@ -16,7 +20,8 @@ page-login {
     body {
       font-family: sans-serif;
       color: #0F2E49;
-      background: url("../assets/imgs/fondo1.jpg") no-repeat;
+      background: url("../assets/imgs/fondo1.jpg");
+      min-height: 50vh;
       justify-content: center;
       align-content: space-between;
       flex-wrap:  wrap;
@@ -49,27 +54,56 @@ page-login {
     
     button{
       padding: 15px 30px 15px 30px;
-      color: #FFF;
-      background-color: #232786;
       font-size: 18px;
       text-align: center;
       font-style: normal;
       border-radius: 20px;
       width: 100%;
+      border-width: 1px 1px 3px;
+      box-shadow: 0 -1px 0 rgba(255,255,255,0.1) inset;
+      //margin-bottom: 10px;
+    }   
+    
+    .boton1 {
+      text-shadow: 1px 1px 1px #FFF;
+      box-shadow: 0px 6px 0 #FFF;
+      padding: 15px 30px 15px 30px;
+      color: #FFF;
+      background-color: rgba(0, 124, 133, 1);
+      font-size: 18px;
+      text-align: center;
+      font-style: normal;
+      width: 100%;
       border: 1px solid #14165E;
       border-width: 1px 1px 3px;
       box-shadow: 0 -1px 0 rgba(255,255,255,0.1) inset;
       margin-bottom: 10px;
-    }   
+    }
     
-    .boton1 {
-      padding: 15px 30px 15px 30px;
-      color: #FFF;
-      background-color: rgba(0, 124, 133, 0.85);
+    .boton1:active {
+      box-shadow: 0px 3px 0 #FFF;
+      position:relative;
+      top:3px;
+      text-shadow: 0px 0px 0px #FFF;
+      background-color: rgba(0, 79, 85, 0.85);
       font-size: 18px;
       text-align: center;
       font-style: normal;
-    //  border-radius: 20px;
+      border: none;
+      margin-bottom: 14px;      
+      border-width: 1px 1px 3px;
+      box-shadow: 0 -1px 0 rgba(255,255,255,0.1) inset;
+    }
+
+    .boton2 {
+      text-shadow: 1px 1px 1px #FFF;
+      box-shadow: 0px 6px 0 #FFF;
+      padding: 15px 30px 15px 30px;
+      color: #FFF;
+      background-color: #535353;
+      font-size: 18px;
+      text-align: center;
+      font-style: normal;
       width: 100%;
       border: 1px solid #14165E;
       border-width: 1px 1px 3px;
@@ -77,19 +111,20 @@ page-login {
       margin-bottom: 10px;
     }
 
-    .boton2 {
+    .boton2:active {
+      position:relative;
+      top:3px;
+      text-shadow: 0px 0px 0px #FFF;
       padding: 15px 30px 15px 30px;
       color: #FFF;
-      background-color: #535353;
+      background-color: rgba(89, 89, 89, 0.85);
       font-size: 18px;
       text-align: center;
       font-style: normal;
-    //  border-radius: 20px;
-      width: 100%;
-      border: 1px solid #14165E;
+      border: none;
       border-width: 1px 1px 3px;
       box-shadow: 0 -1px 0 rgba(255,255,255,0.1) inset;
-      margin-bottom: 10px;
+      margin-bottom: 14px;
     }
 
     fieldset {
@@ -108,4 +143,13 @@ page-login {
       font-weight: 300;
       display: inline;
     }
+
+
+}
+
+.ToastWarning{
+  > div{
+    background-color:#FF0015!important;
+    text-align: center;
+}
 }

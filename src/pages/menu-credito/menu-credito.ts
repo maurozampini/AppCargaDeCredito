@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,AlertController } from 'ionic-angular';
+import { Component, Inject } from '@angular/core';
+import { IonicPage, NavController, NavParams,AlertController, Platform } from 'ionic-angular';
 import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database-deprecated';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -13,36 +13,44 @@ import { ToastController } from 'ionic-angular';
 })
 export class MenuCreditoPage
 {
-  scanData : {};
-  options :BarcodeScannerOptions;
+  platform: any;
+  selectedItem: any;
+  scanData: {};
+  options: BarcodeScannerOptions;
   list: FirebaseListObservable<any>;
-  usuarioIngresado:string;
-  credito100:string
-  credito50:string;
-  credito10:string;
-  codigo : string;
-  ExiteUsuario:boolean;
-  MiUsuario:any;
-  Micredito:number;
-  CreditoMensaje:string;
-  CreditoACargar:string;
-
+  usuarioIngresado: string;
+  credito100: string
+  credito50: string;
+  credito10: string;
+  codigo: string;
+  ExiteUsuario: boolean;
+  MiUsuario: any;
+  Micredito: number;
+  CreditoMensaje: string;
+  CreditoACargar: string;
 
   constructor(public navCtrl: NavController,
-               public navParams: NavParams,
-               db:AngularFireDatabase,
-               public alertCtrl: AlertController,
+              public navParams: NavParams,
+              public alertCtrl: AlertController,
+              private afdb: AngularFireDatabase,
               private barcodeScanner: BarcodeScanner,
               private authAf: AngularFireAuth,
-              private toastCtrl: ToastController) 
+              private toastCtrl: ToastController,
+              @Inject(Platform) platform) 
   {
+    this.navParams = navParams;
+    // If we navigated to this page, we will have an item available as a nav param
+    this.selectedItem = navParams.get('item');
+    this.platform = platform;
+    console.log(this.platform);
+    this.platform.registerBackButtonAction(() => { this.confirmarCerrarSesion() });
 
     this.ExiteUsuario = false;
     this.usuarioIngresado = navParams.get("usuario");
-    this.list=db.list('/Credito');
+    this.list = this.afdb.list('/Credito');
 
-    db.list('/Credito', { preserveSnapshot: true})
-    .subscribe(snapshots=>{
+    this.afdb.list('/Credito', { preserveSnapshot: true})
+    .subscribe(snapshots => {
         snapshots.forEach(snapshot => {
 
               if(snapshot.val().usuario == this.usuarioIngresado)
@@ -68,7 +76,6 @@ export class MenuCreditoPage
           this.credito100 = "";
         }
         this.GetCredito();
-        //this.getCreditoACargar();
         
     })
   } 
@@ -113,8 +120,6 @@ confirmarCerrarSesion() {
     }, (err) => {
         console.log("Error occured : " + err);
     });  
-    
-    //this.getCreditoACargar();
   }
   
   Cargar()
@@ -143,7 +148,7 @@ confirmarCerrarSesion() {
             toast.present();
 
              this.CreditoACargar="Credito a cargar 0";
-             this.codigo="";
+             this.codigo = "";
           }
           else
           {
@@ -183,7 +188,7 @@ confirmarCerrarSesion() {
           });
           toast.present();
            this.CreditoACargar="Credito a cargar 0";
-           this.codigo="";
+           this.codigo = "";
         }
         else
         {
@@ -242,6 +247,7 @@ confirmarCerrarSesion() {
 
       }
       else{
+        this.platform.registerBackButtonAction(() => { });
         let toast = this.toastCtrl.create({
           message: 'El código no es válido',
           duration: 2000,
@@ -258,7 +264,6 @@ confirmarCerrarSesion() {
 
   GetCredito()
   {
-   
       this.Micredito = 0;
 
       if(this.credito10 != "")

@@ -9,12 +9,12 @@ page-menu-credito {
       body {
         font-family: 'Nunito', sans-serif;
         color: #384047;
-      }
+      background: url("../assets/imgs/fondo1.jpg") no-repeat;
+    }
       
       form {
-        margin: 150px 0;
+        margin: 50px 0;
         padding: 10px 20px;
-        background: #ffffff;
       }
       
       .grande{
@@ -29,7 +29,7 @@ page-menu-credito {
       
       input[type="text"],
       select {
-        color: #0060a5;
+        color: #01787E;
         background: rgba(255,255,255,0.1);
         border: none;
         border-bottom-left-radius: 20px;
@@ -45,9 +45,28 @@ page-menu-credito {
         background-color: #e8eeef;
       }
       
+      p {
+        color: rgb(162, 194, 192);
+        font-size: 200%;
+        text-align: center;
+        font-family: Impact;
+      }
       button {
         color: #FFF;
-        background-color: #4bc970;
+        background-color: #0B555D;
+        font-size: 500%;
+        text-align: center;
+        font-style: normal;
+        width: 100%;
+        border-width: 1px 1px 3px;
+        border-top-left-radius: 20px;        
+        border-top-right-radius: 20px;        
+        box-shadow: 0 -1px 0 rgba(255,255,255,0.1) inset;
+      }
+
+      button:active {
+        color: rgb(145, 145, 145);
+        background-color: rgb(8, 55, 60);
         font-size: 500%;
         text-align: center;
         font-style: normal;
@@ -77,22 +96,7 @@ page-menu-credito {
         font-weight: 300;
         display: inline;
       }
-      
-      .number {
-        background-color: #5fcf80;
-        color: #fff;
-        height: 30px;
-        width: 30px;
-        display: inline-block;
-        font-size: 0.8em;
-        margin-right: 4px;
-        line-height: 30px;
-        text-align: center;
-        text-shadow: 0 1px 0 rgba(255,255,255,0.2);
-        border-radius: 100%;
-      }
-      
-}
+
 
 .botonF6{
   width:60px;
@@ -113,18 +117,19 @@ page-menu-credito {
 }
 .botonF6:active{
   transform:scale(1.1);  
+  }
 }
 
 .ToastWarning{
   > div{
-    background-color:#FF0015!important;
-    text-align: center;
-}
+      background-color:#FF0015!important;
+      text-align: center;
+    }
 }
 
 .ToastSuccess{
   > div{
-    background-color:#00BD39!important;
-    text-align: center;
-}
+      background-color:#00BD39!important;
+      text-align: center;
+    }
 }

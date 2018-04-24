@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, Inject } from '@angular/core';
+import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { RegisterPage } from '../register/register';
 import { AlertController, LoadingController, Loading, ToastController } from 'ionic-angular';
@@ -13,6 +13,8 @@ import { MenuCreditoPage } from '../menu-credito/menu-credito';
 })
 export class LoginPage
 {
+  platform: any;
+  selectedItem: any;
   username: string;
   password: string;
   tipoUser: string;
@@ -22,9 +24,15 @@ export class LoginPage
               public navParams: NavParams,
               private afAuth: AngularFireAuth,
               public alertCtrl: AlertController,
-              private toastCtrl: ToastController)
+              private toastCtrl: ToastController,
+              @Inject(Platform) platform)
               {
-
+                this.navParams = navParams;
+                // If we navigated to this page, we will have an item available as a nav param
+                this.selectedItem = navParams.get('item');
+                this.platform = platform;
+                console.log(this.platform);
+                this.platform.registerBackButtonAction(() => { this.platform.exitApp() });
               }
 
   async login()
@@ -42,7 +50,7 @@ export class LoginPage
               .then(result => 
                 {
                   espera.dismiss();
-                  this.navCtrl.push(MenuCreditoPage, { usuario: this.username })
+                  this.navCtrl.setRoot(MenuCreditoPage, { usuario: this.username })
                 })
               .catch(error =>
                 {
@@ -102,8 +110,6 @@ export class LoginPage
       duration: 2000,
       position: 'middle',
       cssClass: "ToastWarning",
-      showCloseButton: true,
-      closeButtonText: "Cerrar",
       dismissOnPageChange: true
     });
     toast.present();
@@ -126,7 +132,6 @@ MiSpiner(): Loading
     content: "Espere...",
     duration: 2500
     });
-   // loader.present();
     return loader;
   }
 }

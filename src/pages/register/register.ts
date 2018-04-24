@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, Inject } from '@angular/core';
+import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AlertController, LoadingController} from 'ionic-angular';
+import { LoginPage } from '../login/login';
 
 
 @IonicPage()
@@ -10,6 +11,8 @@ import { AlertController, LoadingController} from 'ionic-angular';
   templateUrl: 'register.html',
 })
 export class RegisterPage {
+  platform: any;
+  selectedItem: any;
   username:string;
   password:string;
   Mensaje:string;
@@ -20,9 +23,15 @@ export class RegisterPage {
               public navCtrl: NavController,
               public alertCtrl: AlertController,
               public navParams: NavParams,
-              private _auth: AngularFireAuth)
+              private _auth: AngularFireAuth,
+              @Inject(Platform) platform)
               {
-
+                this.navParams = navParams;
+                // If we navigated to this page, we will have an item available as a nav param
+                this.selectedItem = navParams.get('item');
+                this.platform = platform;
+                console.log(this.platform);
+                this.platform.registerBackButtonAction(() => { this.navCtrl.push(LoginPage) });
               }
 
   ionViewDidLoad()
@@ -32,17 +41,19 @@ export class RegisterPage {
 
   async Aceptar()
   {
-    if(this.password.length > 5)
+    if(this.password != null && this.password.length > 5)
     {
       if(this.password == this.passwordconfirm)
-      {  
+      {
+        if(this.username != null && this.username != "")
+        {
           let espera = this.MiSpiner();
           espera.present();    
           await this._auth.auth.createUserWithEmailAndPassword(this.username, this.password)
           .then(result => 
             {
               espera.dismiss();
-              this.Mensaje = this.username + "¡Fue registrado exitosamente!";
+              this.Mensaje = this.username + " ¡Fue registrado exitosamente!";
               alert(this.Mensaje);
               this.navCtrl.pop();
             })
@@ -54,8 +65,14 @@ export class RegisterPage {
                this.showAlert(error.message, "Error al registrarse");
                }, 500);
              })
+        }
+      
+        else
+        {
+          this.showAlert("Faltar completar el correo electrónico", "Error al registrarse")
+        }
       }
-
+      
       else
       {
         this.showAlert("Las claves no coinciden, intente nuevamente", "Error al registrarse")
@@ -100,6 +117,6 @@ export class RegisterPage {
 
   async Cancelar()
   {
-    this.navCtrl.pop();
+    this.navCtrl.setRoot(LoginPage);
   }
 }
