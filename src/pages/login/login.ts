@@ -5,7 +5,6 @@ import { RegisterPage } from '../register/register';
 import { AlertController, LoadingController, Loading, ToastController } from 'ionic-angular';
 import { MenuCreditoPage } from '../menu-credito/menu-credito';
 
-
 @IonicPage()
 @Component({
   selector: 'page-login',
@@ -28,11 +27,10 @@ export class LoginPage
               @Inject(Platform) platform)
               {
                 this.navParams = navParams;
-                // If we navigated to this page, we will have an item available as a nav param
                 this.selectedItem = navParams.get('item');
                 this.platform = platform;
                 console.log(this.platform);
-                this.platform.registerBackButtonAction(() => { this.platform.exitApp() });
+                //this.platform.registerBackButtonAction(() => { this.platform.exitApp() }); //Instrucción para cerrar la app al tocar backbutton
               }
 
   async login()
@@ -87,10 +85,11 @@ export class LoginPage
         this.password="555555";
         break;     
     }
-  }  
+  }
 
   showAlert(mensaje: string, titulo: string)
   {
+    console.log(mensaje);
     switch(mensaje)
     {
       case "The email address is badly formatted.":
@@ -101,6 +100,11 @@ export class LoginPage
       case "The password is invalid or the user does not have a password.":
       {
         mensaje = "La clave es incorrecta, intente nuevamente";
+        break;
+      }
+      case "There is no user record corresponding to this identifier. The user may have been deleted.":
+      {
+        mensaje = "No existe el usuario";
       }
     }
     
@@ -120,11 +124,6 @@ Registrarse()
   this.navCtrl.push(RegisterPage);
 }
 
-ionViewDidLoad()
-{
-  console.log('ionViewDidLoad LoginPage');
-}
-
 MiSpiner(): Loading
 {
   let loader = this.spiner.create(
@@ -135,5 +134,3 @@ MiSpiner(): Loading
     return loader;
   }
 }
-
-

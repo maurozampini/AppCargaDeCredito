@@ -21,6 +21,20 @@ page-menu-credito {
         height: 250px;
         width: 100%;
       }
+      
+.grande:active
+      {
+        color: rgb(145, 145, 145);
+        background-color: rgb(8, 55, 60);
+        font-size: 500%;
+        text-align: center;
+        font-style: normal;
+        width: 100%;
+        border-width: 1px 1px 3px;
+        border-top-left-radius: 20px;        
+        border-top-right-radius: 20px;        
+        box-shadow: 0 -1px 0 rgba(255,255,255,0.1) inset;
+      }
 
       h1 {
         margin: 0 0 30px 0;
@@ -65,16 +79,6 @@ page-menu-credito {
       }
 
       button:active {
-        color: rgb(145, 145, 145);
-        background-color: rgb(8, 55, 60);
-        font-size: 500%;
-        text-align: center;
-        font-style: normal;
-        width: 100%;
-        border-width: 1px 1px 3px;
-        border-top-left-radius: 20px;        
-        border-top-right-radius: 20px;        
-        box-shadow: 0 -1px 0 rgba(255,255,255,0.1) inset;
       }
       
       fieldset {
@@ -118,7 +122,31 @@ page-menu-credito {
 .botonF6:active{
   transform:scale(1.1);  
   }
+
+  .botonF5{
+    width:60px;
+    height:60px;
+    border-radius:100%;
+    background:#0B555D;
+    right:10px;
+    bottom:0;
+    position:absolute;
+    margin-left:16px;
+    margin-bottom:16px;
+    border:none;
+    outline:none;
+    color:#FFF;
+    font-size:36px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    transition:.5s;  
+  }
+  .botonF5:active{
+    transform:scale(1.1);  
+    }
+
 }
+
+
 
 .ToastWarning{
   > div{

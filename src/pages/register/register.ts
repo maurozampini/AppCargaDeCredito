@@ -4,7 +4,6 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AlertController, LoadingController} from 'ionic-angular';
 import { LoginPage } from '../login/login';
 
-
 @IonicPage()
 @Component({
   selector: 'page-register',
@@ -27,11 +26,10 @@ export class RegisterPage {
               @Inject(Platform) platform)
               {
                 this.navParams = navParams;
-                // If we navigated to this page, we will have an item available as a nav param
                 this.selectedItem = navParams.get('item');
                 this.platform = platform;
                 console.log(this.platform);
-                this.platform.registerBackButtonAction(() => { this.navCtrl.push(LoginPage) });
+                //this.platform.registerBackButtonAction(() => { this.navCtrl.push(LoginPage) }); //Instrucción para volver al login al tocar backbutton
               }
 
   ionViewDidLoad()

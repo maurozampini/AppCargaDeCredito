@@ -3,14 +3,6 @@ page-login {
   ion-item{
     border-radius: 20px;
   }
-  /*
- .acomodar {
-  display:  flex;
-  justify-content:  center;
-  align-content: space-between;
-  flex-wrap:  wrap;
-  align-items: center;
-} */
     *, *:before, *:after {
         -moz-box-sizing: border-box;
         -webkit-box-sizing: border-box;
@@ -61,7 +53,6 @@ page-login {
       width: 100%;
       border-width: 1px 1px 3px;
       box-shadow: 0 -1px 0 rgba(255,255,255,0.1) inset;
-      //margin-bottom: 10px;
     }   
     
     .boton1 {
