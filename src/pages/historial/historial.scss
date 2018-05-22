@@ -1,3 +1,148 @@
 page-historial {
 
-}
+    ion-item{
+      border-radius: 20px;
+    }
+      *, *:before, *:after {
+          -moz-box-sizing: border-box;
+          -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+        }
+      
+      body {
+        font-family: sans-serif;
+        color: #0F2E49;
+        background: url("../assets/imgs/fondo1.jpg");
+        min-height: 50vh;
+        justify-content: center;
+        align-content: space-between;
+        flex-wrap:  wrap;
+        align-items: center;
+        padding: 5%;
+      }
+      
+      h1 {
+        margin: 0 0 30px 0;
+        text-align: center;
+        color: white;
+      }
+      
+      input[type="password"],
+      input[type="email"]
+       {
+        background: rgb(248, 245, 245);
+        border: none;
+        font-size: 16px;
+        height: auto;
+        margin: 0;
+        outline: 0;
+        padding: 15px;
+        width: 100%;
+        color: #000000;
+        box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+        margin-bottom: 30px;
+        border-radius: 20px;
+      }
+      
+      p{
+        color: #FFF;
+        background-color: #0B555D;
+        font-size: 250%;
+        text-align: center;
+        font-style: normal;
+        width: 100%;
+        margin-top: 50px;
+        border-width: 1px 1px 3px;
+        border-radius: 10px;                
+        box-shadow: 0 -1px 0 rgba(255,255,255,0.1) inset;
+      }   
+      
+      .boton1 {
+        text-shadow: 1px 1px 1px #FFF;
+        box-shadow: 0px 6px 0 #FFF;
+        padding: 15px 30px 15px 30px;
+        color: #FFF;
+        background-color: rgba(0, 124, 133, 1);
+        font-size: 18px;
+        text-align: center;
+        font-style: normal;
+        width: 100%;
+        border: 1px solid #14165E;
+        border-width: 1px 1px 3px;
+        box-shadow: 0 -1px 0 rgba(255,255,255,0.1) inset;
+        margin-bottom: 10px;
+      }
+      
+      .boton1:active {
+        box-shadow: 0px 3px 0 #FFF;
+        position:relative;
+        top:3px;
+        text-shadow: 0px 0px 0px #FFF;
+        background-color: rgba(0, 79, 85, 0.85);
+        font-size: 18px;
+        text-align: center;
+        font-style: normal;
+        border: none;
+        margin-bottom: 14px;      
+        border-width: 1px 1px 3px;
+        box-shadow: 0 -1px 0 rgba(255,255,255,0.1) inset;
+      }
+  
+      .boton2 {
+        text-shadow: 1px 1px 1px #FFF;
+        box-shadow: 0px 6px 0 #FFF;
+        padding: 15px 30px 15px 30px;
+        color: #FFF;
+        background-color: #535353;
+        font-size: 18px;
+        text-align: center;
+        font-style: normal;
+        width: 100%;
+        border: 1px solid #14165E;
+        border-width: 1px 1px 3px;
+        box-shadow: 0 -1px 0 rgba(255,255,255,0.1) inset;
+        margin-bottom: 10px;
+      }
+  
+      .boton2:active {
+        position:relative;
+        top:3px;
+        text-shadow: 0px 0px 0px #FFF;
+        padding: 15px 30px 15px 30px;
+        color: #FFF;
+        background-color: rgba(89, 89, 89, 0.85);
+        font-size: 18px;
+        text-align: center;
+        font-style: normal;
+        border: none;
+        border-width: 1px 1px 3px;
+        box-shadow: 0 -1px 0 rgba(255,255,255,0.1) inset;
+        margin-bottom: 14px;
+      }
+  
+      fieldset {
+        margin-bottom: 30px;
+        border: none;
+      }
+      
+      label {
+        display: block;
+        margin-bottom: 8px;
+        color: white;
+        text-align: center;
+      }
+      
+      label.light {
+        font-weight: 300;
+        display: inline;
+      }
+  
+  
+  }
+  
+  .ToastWarning{
+    > div{
+      background-color:#FF0015!important;
+      text-align: center;
+  }
+  }

@@ -17,7 +17,8 @@ export class LoginPage
   username: string;
   password: string;
   tipoUser: string;
-  
+  splash = true;
+
   constructor(public spiner: LoadingController,
               public navCtrl: NavController,
               public navParams: NavParams,
@@ -132,5 +133,9 @@ MiSpiner(): Loading
     duration: 2500
     });
     return loader;
+  }
+
+  ionViewDidLoad() {
+    setTimeout(() => this.splash = false, 4000);
   }
 }

@@ -44,16 +44,11 @@ export class MenuCreditoPage
     //console.log(this.platform);
     this.ExiteUsuario = false;
     this.usuarioIngresado = this.navParams.get("usuario");
-    console.log(this.usuarioIngresado);
-    
     this.list = this.afdb.list('/Credito');
     
-    console.log(this.list.query);
-
     this.list.snapshotChanges().subscribe(
     snapshots => {
         snapshots.forEach(snapshot => {
-        console.log(snapshot.payload.val().usuario);
               if(snapshot.payload.val().usuario == this.usuarioIngresado)
                  {
                     this.MiUsuario = snapshot.payload.ref;
@@ -94,15 +89,7 @@ export class MenuCreditoPage
   }
 
   historial(){
-  this.navCtrl.push(HistorialPage,
-    { 
-      fecha: {   
-        inicio: this.fecha[0],
-        fecha10: this.fecha[1],
-        fecha50: this.fecha[2],
-        fecha100: this.fecha[3]
-      }
-    })
+    this.navCtrl.push(HistorialPage, { usuario: this.usuarioIngresado })
 }
 
 confirmarCerrarSesion() {
@@ -133,7 +120,7 @@ confirmarCerrarSesion() {
   scan()
   {
     this.options = {
-        prompt : "Scanee el codigo"
+        prompt : "Scanee el código"
     }
     this.barcodeScanner.scan(this.options).then((barcodeData) => {
 
@@ -169,7 +156,7 @@ confirmarCerrarSesion() {
             this.credito10 = "8c95def646b6127282ed50454b73240300dccabc";
 
              let toast = this.toastCtrl.create({
-              message: 'Se cargo 10 credito',
+              message: 'Se cargo 10 crédito',
               duration: 2000,
               position: 'top',
               cssClass: "ToastSuccess",
@@ -179,7 +166,7 @@ confirmarCerrarSesion() {
             });
             toast.present();
 
-             this.CreditoACargar="Credito a cargar 0";
+             this.CreditoACargar="Crédito a cargar 0";
              this.codigo = "";
           }
           else
@@ -216,7 +203,7 @@ confirmarCerrarSesion() {
           this.credito50 = "ae338e4e0cbb4e4bcffaf9ce5b409feb8edd5172 ";
 
           let toast = this.toastCtrl.create({
-            message: 'Se cargo 50 credito',
+            message: 'Se cargo 50 crédito',
             duration: 2000,
             position: 'top',
             cssClass: "ToastSuccess",
@@ -225,13 +212,13 @@ confirmarCerrarSesion() {
             dismissOnPageChange: true
           });
           toast.present();
-           this.CreditoACargar="Credito a cargar 0";
+           this.CreditoACargar="Crédito a cargar 0";
            this.codigo = "";
         }
         else
         {
           let toast = this.toastCtrl.create({
-            message: 'Ya se uso el codigo',
+            message: 'Ya se uso el código',
             duration: 2000,
             position: 'bottom',
             cssClass: "ToastWarning",
@@ -324,24 +311,24 @@ confirmarCerrarSesion() {
       {
         this.Micredito += 100;
       }
-      this.CreditoMensaje = "Tu credito es: " + this.Micredito;
+      this.CreditoMensaje = "Tu crédito es: " + this.Micredito;
   }
 
   getCreditoACargar()
   {
     if ("8c95def646b6127282ed50454b73240300dccabc" == this.codigo)
     {
-      this.CreditoACargar="Credito a cargar 10";
+      this.CreditoACargar="Crédito a cargar 10";
     }
 
     else if ("ae338e4e0cbb4e4bcffaf9ce5b409feb8edd5172 " == this.codigo)
     {
-      this.CreditoACargar="Credito a cargar 50";
+      this.CreditoACargar="Crédito a cargar 50";
     }
 
     else if("2786f4877b9091dcad7f35751bfcf5d5ea712b2f" == this.codigo)
     {
-      this.CreditoACargar="Credito a cargar 100";
+      this.CreditoACargar="Crédito a cargar 100";
     }
 
     else

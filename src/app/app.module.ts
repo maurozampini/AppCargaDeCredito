@@ -13,6 +13,7 @@ import { MenuCreditoPage } from '../pages/menu-credito/menu-credito';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Camera } from '@ionic-native/camera';
 import { AngularFireDatabase } from 'angularfire2/database';
+import { HistorialPage } from '../pages/historial/historial';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCRD4NLhPyLKLMV0JmuBsOtktJDJn2a48U",
@@ -28,7 +29,8 @@ export const firebaseConfig = {
     MyApp,
     RegisterPage,
     LoginPage,
-    MenuCreditoPage
+    MenuCreditoPage,
+    HistorialPage
   ],
   imports: [
     BrowserModule,
@@ -42,7 +44,8 @@ export const firebaseConfig = {
     MyApp,
     RegisterPage,
     LoginPage,
-    MenuCreditoPage
+    MenuCreditoPage,
+    HistorialPage
   ],
   providers: [
     StatusBar,
